@@ -34,10 +34,17 @@ NA_complex_
 NA_character_
 
 ##Operator Tokens
-Arithmetic	+ - * / %% ^
-Relational > >= < <= == !=
-Logical ! & |
-Model Formulae ~
-Assignment -> <-
-List indexing $
-Sequence :
+Arithmetic	+ - * / %% ^  
+Relational > >= < <= == !=  
+Logical ! & |  
+Model Formulae ~  
+Assignment -> <-  
+List indexing $  
+Sequence :  
+
+##Grouping
+Ordinary '('  ')'  
+Braces '{'  '}' to delimit blocks of expressions
+
+##Indexing
+'['   ']'
