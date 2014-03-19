@@ -2,11 +2,11 @@
 This repo is a small implementation of scanners and parsers written in C to analyze code in R programming language.
 
 ##Constants
-NULL : Empty object\s\s
-NA : Not available\s\s
-Inf : Inifity\s\s
-NaN : Not-a-Number ( result of 0/0 or 1/0 etc)\s\s
-Logical constants are either TRUE or FALSE\s\s
+NULL : Empty object  
+NA : Not available  
+Inf : Inifity  
+NaN : Not-a-Number ( result of 0/0 or 1/0 etc)  
+Logical constants are either TRUE or FALSE  
 
 ##Identifiers
 Sequence of letters, digits, period ('.') and underscore
