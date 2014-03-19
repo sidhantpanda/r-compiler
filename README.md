@@ -13,25 +13,25 @@ Sequence of letters, digits, period ('.') and underscore
 #####Identifiers can not start with a digit, underscore or a period followed by a digit
 
 ##Reserved Words
-if
-else
-repeat
-while
-function
-for
-in
-next
-break
-TRUE
-FALSE
-NULL
-Inf
-NaN
-NA
-NA_integer_
-NA_real_
-NA_complex_
-NA_character_
+if  
+else  
+repeat  
+while  
+function  
+for  
+in  
+next  
+break  
+TRUE  
+FALSE  
+NULL  
+Inf  
+NaN  
+NA  
+NA_integer_  
+NA_real_  
+NA_complex_  
+NA_character_  
 
 ##Operator Tokens
 Arithmetic	+ - * / %% ^  
