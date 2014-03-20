@@ -9,7 +9,12 @@
 #include<ctype.h>
 #include<stdlib.h>
 
-// int find_label_index(char **label_codes,char ch);
+struct tok{
+	struct tok *pre,*next;
+	int line;
+	char lexeme[50];
+	char type[50];
+};
 
 int main(int argc,char *argv[])
 {
@@ -167,7 +172,7 @@ int main(int argc,char *argv[])
 		{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}, // 44
 		{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}, // 45
 		{  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}, // 46
-		{ 14, 14,  0, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14}  // float
+		{ 14, 14,  0, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14}  // 47 float
 	};
 
 	char label_codes[31][5]={"L",".","D",",",">","=","<","!","+","-","*","%%","^","|","~",":","$","(",")","{","}","[","]"," ","\n","t","#","_","\\","/","other"};
@@ -181,12 +186,22 @@ int main(int argc,char *argv[])
 	int flag=0;
 	char token[60];
 	token[0]='\0';
+	int line_number=1;
+	struct tok *result;
+	result=NULL;
+	result=(struct tok *)(malloc(sizeof(struct tok*)));
+	result->pre=NULL;
+	result->next=NULL;
 
 	FILE *source;
 	source=fopen(argv[1],"r");
 	while((ch=fgetc(source))!=EOF)
 	{
-		st[0]=ch;
+		if(ch=='\r')
+			continue;
+		if(ch=='\n')
+			line_number++;
+a:		st[0]=ch;
 		st[1]='\0';
 		if(isalpha(ch))
 		{
@@ -233,11 +248,33 @@ int main(int argc,char *argv[])
 		}
 		else if((state_table[state][current_read]==-1) && (action_table[state][current_read]==2))
 		{
+			
+			// printf("%s\n",lookup_codes[lookup_table[state][current_read]]);
+			result->line=line_number;
+			strcpy(result->lexeme,token);
+			// printf("%s\n", result->lexeme);
+			// printf("%s\n",token);
+			strcpy(result->type,lookup_codes[lookup_table[state][current_read]]);
+			printf("%d\t%s\t\t%s\n",result->line,result->type,result->lexeme);
+			result->next=(struct tok *)(malloc(sizeof(struct tok*)));
+
+			result=result->next;
+
+
+
+
 			buffered=1;
 			state=0;
-			token='\0';
+			token[0]='\0';
 		}
-		// printf("%c",ch);
+		else{
+			continue;
+		}
+		if((buffered==1)&&(current_read!=30))
+		{
+			goto a;
+		}
+
 
 		flag=0;
 	}
@@ -247,13 +284,3 @@ int main(int argc,char *argv[])
 	// printf("%d",state_table[0][2]);
 	return 0;
 }
-// int find_label_index(char **label_codes,char ch)
-// {
-// 	int i=0;
-// 	for(i=0;i<31;i++)
-// 	{
-// 		if(strcmp(*(*label_codes+i),ch)==0)
-// 			return i;
-// 	}
-// 	return -1;
-// }
