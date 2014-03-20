@@ -1,12 +1,16 @@
-identifier:(L|.D)(L|D|.|_)*
+identifier:(L|.(_|L))(L|D|_|.)*
+int:D+
+float:D*.D+|D+.D*
+separator:,
 keywords:if|else|repeat|while|function|for|in|next|break|TRUE|FALSE|NULL|Inf|NaN|NA|NA_integer_|NA_real_|NA_complex_|NA_character_
 relop:>|>=|<|<=|==|!=
 arithop:\+|-|\*|%%|\^
 logop:!|\|
 mod_form:~
-assignop:->|<-
+assignop:->|<-|=
 sequence:\:
+listindex:$
 grouping:\(|\)|{|}
 indexing:\[|\]
 whitespace:\ |\n|\t
-comment:#(L)+(\n)
+comment:#(L|D|.|\ |\*)*(\n)
