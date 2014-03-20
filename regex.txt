@@ -13,4 +13,4 @@ listindex:$
 grouping:\(|\)|{|}
 indexing:\[|\]
 whitespace:\ |\n|\t
-comment:#(L|D|.|\ |\*)*(\n)
+comment:#(L|D|,|_|.|\*|\+|\ )*(\n)
